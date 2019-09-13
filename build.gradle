@@ -1,0 +1,58 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.8.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.3.50"
+    id "org.jetbrains.kotlin.plugin.noarg" version "1.3.50"
+    id "org.jetbrains.kotlin.plugin.jpa" version "1.3.50"
+}
+
+allOpen {
+    annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
+}
+
+group = 'sk.lukasanda'
+version = '1.0.0'
+sourceCompatibility = '12'
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+bootJar { // creates fully executable archives
+    launchScript()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.1.8.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.1.8.RELEASE'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.0'
+    implementation 'io.springfox:springfox-data-rest:2.9.0'
+    implementation 'io.springfox:springfox-swagger2:2.9.0'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.2.41'
+    runtimeOnly 'org.postgresql:postgresql'
+//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat:2.1.8.RELEASE'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+test {
+    useJUnitPlatform()
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

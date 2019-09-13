@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: Matboj app backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/matboj
+    username: postgres
+    password: postgres1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+message: The Spring 'default' Profile is active
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  level:
+    root: DEBUG
